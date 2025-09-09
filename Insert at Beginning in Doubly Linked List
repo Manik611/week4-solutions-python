@@ -1,0 +1,25 @@
+class DLLNode:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+def insertAtBeginning(head, new_data):
+    new_node = DLLNode(new_data)
+    new_node.next = head
+    if head:
+        head.prev = new_node
+    head = new_node
+    return head
+
+def printDLL(head):
+    while head:
+        print(head.data, end=" ")
+        head = head.next
+    print("-> NULL")
+
+head = None
+for val in [4, 3, 2, 1][::-1]:
+    head = insertAtBeginning(head, val)
+print("DLL:", end=" ")
+printDLL(head)
