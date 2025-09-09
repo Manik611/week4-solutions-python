@@ -1,0 +1,12 @@
+def getIntersectionNode(head1, head2):
+    p1, p2 = head1, head2
+    while p1 != p2:
+        p1 = head2 if not p1 else p1.next
+        p2 = head1 if not p2 else p2.next
+    return p1
+
+common = Node(15)
+common.next = Node(30)
+head1 = Node(10); head1.next = common
+head2 = Node(3); head2.next = Node(6); head2.next.next = Node(9); head2.next.next.next = common
+print("Intersection Point:", getIntersectionNode(head1, head2).data)
