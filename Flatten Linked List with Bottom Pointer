@@ -1,0 +1,49 @@
+class BottomNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.bottom = None
+
+def merge(a, b):
+    if not a: return b
+    if not b: return a
+    if a.data < b.data:
+        result = a
+        result.bottom = merge(a.bottom, b)
+    else:
+        result = b
+        result.bottom = merge(a, b.bottom)
+    return result
+
+def flatten(root):
+    if not root or not root.next:
+        return root
+    root.next = flatten(root.next)
+    root = merge(root, root.next)
+    return root
+
+def printBottomList(root):
+    while root:
+        print(root.data, end=" -> ")
+        root = root.bottom
+    print("NULL")
+
+head = BottomNode(5)
+head.next = BottomNode(10)
+head.next.next = BottomNode(19)
+head.next.next.next = BottomNode(28)
+
+head.bottom = BottomNode(7)
+head.bottom.bottom = BottomNode(8)
+head.bottom.bottom.bottom = BottomNode(30)
+
+head.next.bottom = BottomNode(20)
+head.next.next.bottom = BottomNode(22)
+head.next.next.bottom.bottom = BottomNode(50)
+head.next.next.next.bottom = BottomNode(35)
+head.next.next.next.bottom.bottom = BottomNode(40)
+head.next.next.next.bottom.bottom.bottom = BottomNode(45)
+
+flat = flatten(head)
+print("Flattened List:", end=" ")
+printBottomList(flat)
