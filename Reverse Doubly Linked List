@@ -1,0 +1,22 @@
+def reverseDLL(head):
+    if not head or not head.next:
+        return head
+    curr = head
+    temp = None
+    while curr:
+        temp = curr.prev
+        curr.prev = curr.next
+        curr.next = temp
+        curr = curr.prev
+    if temp:
+        head = temp.prev
+    return head
+
+head = None
+for val in [1, 2, 3, 4, 5]:
+    head = insertEndDLL(head, val)
+print("Original:", end=" ")
+printDLL(head)
+head = reverseDLL(head)
+print("Reversed:", end=" ")
+printDLL(head)
