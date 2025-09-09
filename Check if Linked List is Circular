@@ -1,0 +1,23 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def isCircular(head):
+    if not head:
+        return True
+    temp = head.next
+    while temp and temp != head:
+        temp = temp.next
+    return temp == head
+
+head1 = Node(2)
+head1.next = Node(4)
+head1.next.next = Node(6)
+print("List1 Circular?", isCircular(head1))
+head2 = Node(1)
+head2.next = Node(2)
+head2.next.next = Node(3)
+head2.next.next.next = head2
+print("List2 Circular?", isCircular(head2))
+
