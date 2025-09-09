@@ -1,0 +1,31 @@
+def sortedInsertCLL(head, data):
+    new_node = CLLNode(data)
+    if not head:
+        new_node.next = new_node
+        return new_node
+    curr = head
+    if data <= head.data:
+        while curr.next != head:
+            curr = curr.next
+        curr.next = new_node
+        new_node.next = head
+        return new_node
+    while curr.next != head and curr.next.data < data:
+        curr = curr.next
+    new_node.next = curr.next
+    curr.next = new_node
+    return head
+
+def createCLL(arr):
+    head = None
+    for x in arr:
+        head = insertEndCLL(head, x)
+    return head
+
+head = createCLL([1, 2, 4])
+print("Original CLL:", end=" ")
+printCLL(head)
+head = sortedInsertCLL(head, 2)
+print("After Insert Sorted:", end=" ")
+printCLL(head)
+
